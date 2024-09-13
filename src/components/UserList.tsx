@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTypedSelector } from "../hooks/userTypedSelector";
 import { useActions } from "../hooks/useAction";
 import "./UserList.css";
+import { Customer, SearchedCustomer } from "../types/user";
 const UserList: React.FC = () => {
   const { users, error, loading } = useTypedSelector((state) => state.user);
   const [searchedPerson, setSearchedPerson] = useState({
@@ -19,7 +20,7 @@ const UserList: React.FC = () => {
   });
   function handleChangeSearchedPerson(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
-    setSearchedPerson((prevData: any) => {
+    setSearchedPerson((prevData: SearchedCustomer) => {
       return {
         ...prevData,
         [name]: value,
@@ -28,7 +29,7 @@ const UserList: React.FC = () => {
   }
   function handleChangeAddedUser(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
-    setAddedUser((prevData: any) => {
+    setAddedUser((prevData: Customer) => {
       return {
         ...prevData,
         id: users.length + 1,
