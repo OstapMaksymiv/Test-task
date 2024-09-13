@@ -132,7 +132,3 @@ export const userReducer = (state:UserState = initialState, action:UserAction): 
     }
 }
 ```
-
-## Conclusion
-
-This project demonstrates the use of React with Redux Toolkit and TypeScript to create a simple yet scalable application that fetches and displays data asynchronously. The integration with `redux-thunk` allows for clean handling of side effects like API calls.
