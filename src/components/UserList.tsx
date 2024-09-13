@@ -5,6 +5,7 @@ import "./UserList.css";
 import { Customer, SearchedCustomer } from "../types/user";
 const UserList: React.FC = () => {
   const { users, error, loading } = useTypedSelector((state) => state.user);
+  const [errorMessage, setErrorMessage] = useState("");
   const [searchedPerson, setSearchedPerson] = useState({
     name: "",
     username: "",
@@ -29,6 +30,14 @@ const UserList: React.FC = () => {
   }
   function handleChangeAddedUser(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
+    const cleanedValue = value.replace(/[^0-9\-().x]/g, "");
+    if (name === "phone" && value !== cleanedValue) {
+      setErrorMessage(
+        "Invalid characters detected. Only digits and -,(),x,. are allowed."
+      );
+    } else {
+      setErrorMessage("");
+    }
     setAddedUser((prevData: Customer) => {
       return {
         ...prevData,
@@ -125,8 +134,22 @@ const UserList: React.FC = () => {
               placeholder="Phone"
               onChange={(e) => handleChangeAddedUser(e)}
             />
+            {errorMessage.length > 0 && (
+              <p style={{ color: "red", fontSize: "13px", width: "180px" }}>
+                {errorMessage}
+              </p>
+            )}
           </article>
-          <button type="submit">Submit</button>
+          <button
+            type="submit"
+            style={
+              errorMessage.length > 0
+                ? { pointerEvents: "none" }
+                : { pointerEvents: "auto" }
+            }
+          >
+            Submit
+          </button>
         </form>
       </div>
       <div className="mainBlock">
@@ -137,7 +160,6 @@ const UserList: React.FC = () => {
             <input
               type="text"
               name="name"
-              required
               value={searchedPerson.name}
               placeholder="Name"
               onChange={(e) => handleChangeSearchedPerson(e)}
@@ -147,7 +169,6 @@ const UserList: React.FC = () => {
             <label htmlFor="username">Username</label>
             <input
               type="text"
-              required
               name="username"
               value={searchedPerson.username}
               placeholder="Username"
@@ -158,7 +179,6 @@ const UserList: React.FC = () => {
             <label htmlFor="email">Email</label>
             <input
               type="email"
-              required
               name="email"
               value={searchedPerson.email}
               placeholder="Email"
@@ -169,7 +189,6 @@ const UserList: React.FC = () => {
             <label htmlFor="phone">Phone</label>
             <input
               type="string"
-              required
               name="phone"
               value={searchedPerson.phone}
               placeholder="Phone"
