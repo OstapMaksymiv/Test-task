@@ -20,7 +20,7 @@ export const fetchUsers = () => {
 }
 export const searchUsers = (data:SearchedCustomer) => {
     const payload = Object.keys(data).map((key:string) => [key, data[key]])
-    const isAllValuesEmpty = payload.every(([key, value]) => value === "");
+    const isAllValuesEmpty = payload.every(([, value]) => value === "");
 
     return {
         type:UserActionTypes.SEARCH_USERS, 
