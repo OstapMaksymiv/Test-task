@@ -84,22 +84,7 @@ export const fetchUsers = () => {
         }
     }
 }
-export const searchUsers = (data:SearchedCustomer) => {
-    const payload = Object.keys(data).map((key:string) => [key, data[key]])
-    const isAllValuesEmpty = payload.every(([, value]) => value === "");
-
-    return {
-        type:UserActionTypes.SEARCH_USERS, 
-        payload:payload,
-        allValuesEmpty: isAllValuesEmpty
-    }
-}
-export const addUser = (user: Customer) => {
-    return {
-        type:UserActionTypes.ADD_USER,
-        payload: user
-    }
-}
+...
 ```
 
 ## State and Reducers
