@@ -30,6 +30,9 @@
 .adding-form button{
 	width: 50%;
 	padding: 5px 15px;
+	border: 1px solid rgba(107, 104, 104, 0.87);
+	cursor: pointer;
+
 }
 .adding-block h2 {
 	margin-bottom: 15px;
@@ -38,7 +41,7 @@
 .input-block{
 	display: flex;
 	flex-direction: column;
-
+	
 }
 .input-block input{
 	margin-top: 4px;
@@ -46,6 +49,8 @@
 	outline: none;
 	border: 1px solid rgb(118, 118, 118);
 	background-color: rgba(20, 19, 19, 0.562);
+	box-shadow: 0.5rem 0.3rem 0.2rem rgba(82, 81, 81, 0.274);
+	transition: all 0.3s ease;
 	
 }
 .table-header {
@@ -62,7 +67,7 @@
 	padding:var(--half-spacing-unit * 1.5) 0;
 	
 	&:nth-of-type(odd) {
-        background-color: rgb(117, 117, 116);
+		background-color: rgb(117, 117, 116);
 	}
 }
 
@@ -101,7 +106,7 @@
 	height: 48px;
 	display: inline-block;
 	position: relative;
-
+	
 }
 .loader::after,
 .loader::before {
@@ -122,11 +127,23 @@
 
 @keyframes animloader {
 	0% {
-	transform: scale(0);
-	opacity: 1;
+		transform: scale(0);
+		opacity: 1;
 	}
 	100% {
-	transform: scale(1);
-	opacity: 0;
+		transform: scale(1);
+		opacity: 0;
+	}
+}
+
+@media (any-hover: hover) {
+	.input-block input:focus, .input-block input:hover {
+	  box-shadow: none;
+	}
+	.submit_btn:hover {
+	  box-shadow: none;
+	}
+	.submit_btn:hover img {
+	  transform: translateX(5px);
 	}
 }
